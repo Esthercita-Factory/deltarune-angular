@@ -1,0 +1,6 @@
+<h1>Personajes de DELTARUNE</h1>
+<ul>
+    @for (personaje of personajes(); track personaje.id) {
+        <li>{{ personaje.nombre }} — {{ personaje.rol }}</li>
+    }
+</ul>
