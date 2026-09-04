@@ -4,3 +4,9 @@
         <li>{{ personaje.nombre }} — {{ personaje.rol }}</li>
     }
 </ul>
+
+<form (ngSubmit)="agregarPersonaje()">
+    <input [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required>
+    <input [(ngModel)]="rol" name="rol" placeholder="Rol" required>
+    <button type="submit">Agregar</button>
+</form>

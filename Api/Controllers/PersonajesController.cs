@@ -20,4 +20,12 @@ public class PersonajesController : ControllerBase
     {
         return Ok(Personajes);
     }
+
+    [HttpPost]
+    public ActionResult<Personaje> Create(Personaje nuevoPersonaje)
+    {
+        nuevoPersonaje.Id = Personajes.Max(p => p.Id) + 1;
+        Personajes.Add(nuevoPersonaje);
+        return Ok(nuevoPersonaje);
+    }
 }

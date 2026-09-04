@@ -16,4 +16,8 @@ export class Personajes {
     getAll(): Observable<Personaje[]> {
         return this.http.get<Personaje[]>(this.apiUrl);
     }
+
+    create(nuevoPersonaje: Omit<Personaje, 'id'>): Observable<Personaje>{
+        return this.http.post<Personaje>(this.apiUrl, nuevoPersonaje);
+    }
 }
