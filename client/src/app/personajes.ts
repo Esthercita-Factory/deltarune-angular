@@ -20,4 +20,12 @@ export class Personajes {
     create(nuevoPersonaje: Omit<Personaje, 'id'>): Observable<Personaje>{
         return this.http.post<Personaje>(this.apiUrl, nuevoPersonaje);
     }
+
+    delete(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    }
+
+    update(id: number, personajeActualizado: Omit<Personaje, 'id'>): Observable<void> {
+        return this.http.put<void>(`${this.apiUrl}/${id}`, personajeActualizado);
+    }
 }

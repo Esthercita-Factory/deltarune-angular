@@ -24,8 +24,35 @@ public class PersonajesController : ControllerBase
     [HttpPost]
     public ActionResult<Personaje> Create(Personaje nuevoPersonaje)
     {
-        nuevoPersonaje.Id = Personajes.Max(p => p.Id) + 1;
+        nuevoPersonaje.Id = Personajes.Count == 0 ? 1 : Personajes.Max(p => p.Id) + 1;
         Personajes.Add(nuevoPersonaje);
         return Ok(nuevoPersonaje);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var personaje = Personajes.FirstOrDefault(p => p.Id == id);
+        if (personaje is null)
+        {
+            return NotFound();
+        }
+
+        Personajes.Remove(personaje);
+        return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Update(int id, Personaje personajeActualizado)
+    {
+        var personaje = Personajes.FirstOrDefault(p => p.Id == id);
+        if (personaje is null)
+        {
+            return NotFound();
+        }
+
+        personaje.Nombre = personajeActualizado.Nombre;
+        personaje.Id = personajeActualizado.Id;
+        return NoContent();
     }
 }

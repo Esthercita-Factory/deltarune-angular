@@ -2,11 +2,16 @@
 <ul>
     @for (personaje of personajes(); track personaje.id) {
         <li>{{ personaje.nombre }} — {{ personaje.rol }}</li>
+        <button (click)="editar(personaje)">Editar</button>
+        <button (click)="eliminarPersonaje(personaje.id)">Eliminar</button>
     }
 </ul>
 
-<form (ngSubmit)="agregarPersonaje()">
+<form (ngSubmit)="guardar()">
     <input [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required>
     <input [(ngModel)]="rol" name="rol" placeholder="Rol" required>
-    <button type="submit">Agregar</button>
+    <button type="submit">{{ editandoId == null ? 'Agregar' : 'Guardar cambios' }}</button>
+    @if (editandoId !== null) {
+        <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+    }
 </form>
